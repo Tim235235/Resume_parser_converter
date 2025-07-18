@@ -1,7 +1,7 @@
 import streamlit as st
 from cv_parser import *
 
-correction_prompt = "https://chatgpt.com/share/68790f3d-7a10-800f-bfaa-c04f4f6cf5b5"
+correction_prompt = "https://chatgpt.com/share/687a98af-3d28-800f-a4e6-16af01eac36d"
 # === Execution ===
 st.title("Resume Reformater")
 pdf_file = st.file_uploader("Upload your resume")
