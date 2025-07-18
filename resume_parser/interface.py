@@ -22,14 +22,15 @@ if st.button("convert"):
     data = populate_word_dic(data_to_insert, extracted_data)
     final_text = bullet_points_check(data)
     word_file = replace_placeholders(final_text)
-    convert_docx_to_pdf()
 
-    with open("Converted_resume.pdf", "rb") as file:
-        pdf_bytes = file.read()
+    if word_file and os.path.exists(word_file):
+        with open(word_file, "rb") as file:
+            st.download_button(
+                label="Download Word Resume",
+                data=file,
+                file_name="Converted_resume.docx",
+                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            )
+    else:
+        st.error("Resume generation failed.")
 
-    st.download_button(
-        label="Download file",
-        data=pdf_bytes,
-        file_name="Converted_resume.pdf",
-        mime="application/pdf",
-    )
