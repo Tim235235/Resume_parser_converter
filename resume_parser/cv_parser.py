@@ -34,7 +34,9 @@ def extract_sections(text):
     sections = {}
     for i, match in enumerate(matches):
         matched_heading = match.group(1).strip().lower()
-        canonical_heading = heading_map[matched_heading]
+        canonical_heading = heading_map.get(matched_heading)
+        if not canonical_heading:
+            continue  # skip unknown headings
         start = match.end()
         end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
         sections[canonical_heading] = text[start:end]
@@ -43,11 +45,11 @@ def extract_sections(text):
 
 # === Formatting preview ===
 def formatting(path):
-    text = extract_sections(extract_text_from_pdf(path))
-    for heading in text:
-        if text[heading].split() == "\n":
-            text[heading].join()
-        print(f"|{heading}|{text[heading]}")
+    sections = extract_sections(extract_text_from_pdf(path))
+    for heading, content in sections.items():
+        if content.strip() == "\n":
+            content = ""
+        print(f"|{heading}|{content}")
 
 # === Name extractor ===
 def name(text, info_dic):
@@ -60,7 +62,7 @@ def name(text, info_dic):
 
 # === Pattern-based finders ===
 def age_finder(text):
-    for pattern in loaded_patterns["age_patterns"]:
+    for pattern in loaded_patterns.get("age_patterns", []):
         match = re.search(pattern, text)
         if match:
             for group in match.groups():
@@ -70,7 +72,7 @@ def age_finder(text):
 
 def nationality_finder(text):
     doc = nlp(text)
-    for pattern in loaded_patterns["nationality_patterns"]:
+    for pattern in loaded_patterns.get("nationality_patterns", []):
         match = re.search(pattern, text)
         if match:
             nationality = match.group(1)
@@ -81,27 +83,25 @@ def nationality_finder(text):
             for ent in sent.ents:
                 if ent.label_ == "NORP":
                     return ent.text
-
     return "N/A"
 
-
 def years_of_experience_finder(text):
-    for pattern in loaded_patterns["years_experience_patterns"]:
-        match = re.search(re.compile(pattern), text)
+    for pattern in loaded_patterns.get("years_experience_patterns", []):
+        match = re.search(pattern, text)
         if match:
             return match.group(1)
     return "N/A"
 
 def availability_finder(text):
-    for pattern in loaded_patterns["availability_patterns"]:
-        match = re.search(re.compile(pattern), text)
+    for pattern in loaded_patterns.get("availability_patterns", []):
+        match = re.search(pattern, text)
         if match:
             return match.group(1)
     return "N/A"
 
 # === IT skills extraction ===
 def it_section(text):
-    it_skills_sorted = sorted(loaded_patterns["it_skills"], key=len, reverse=True)
+    it_skills_sorted = sorted(loaded_patterns.get("it_skills", []), key=len, reverse=True)
     pattern = r'|'.join(
         fr'(?<!\w){re.escape(skill)}(?!\w)' for skill in it_skills_sorted
     )
@@ -110,18 +110,12 @@ def it_section(text):
 
 # === Hidden data collection ===
 def hidden_data_collector(text, section_info):
-    age = age_finder(text)
-    nationality = nationality_finder(text)
-    years_of_experience = years_of_experience_finder(text)
-    availability = availability_finder(text)
+    section_info["age"] = age_finder(text)
+    section_info["nationality"] = nationality_finder(text)
+    section_info["years_of_experience"] = years_of_experience_finder(text)
+    section_info["availability"] = availability_finder(text)
     it = it_section(text)
-    it_string = "\n\n".join(it)
-
-    section_info["age"] = age
-    section_info["nationality"] = nationality
-    section_info["years_of_experience"] = years_of_experience
-    section_info["availability"] = availability
-    section_info["it"] = it_string
+    section_info["it"] = "\n\n".join(it)
     return section_info
 
 # === Word document reading ===
@@ -133,23 +127,20 @@ def read_word(filename):
     return full_text
 
 # === Data population for template ===
-
 def populate_word_dic(dti, ed):
     for key in keys:
         value = dti.get(key)
-        if value is not None:
-            ed[key] = value
-        else:
-            ed[key] = "N/A"
+        ed[key] = value if value is not None else "N/A"
     return ed
 
 # === Replace placeholders in DOCX ===
 def replace_placeholders(use_data):
     doc = DocxTemplate(template_docx)
     doc.render(use_data)
-    doc.save("filled_template.docx")
+    doc.save(filled_template_path)
     return doc
 
+# === Bullet points fix ===
 def bullet_points_check(text):
     bullet_pattern = r"[•\-\*\▪\●\‣\∙]\s*\n\s*"
     for key, value in text.items():
@@ -158,25 +149,31 @@ def bullet_points_check(text):
             text[key] = value
     return text
 
+# === Convert DOCX to PDF ===
 def convert_docx_to_pdf():
-    base_dir2 = os.path.dirname(__file__)
-    input_docx = os.path.join(base_dir2, "filled_template.docx")
-    output_pdf = os.path.join(base_dir2, "Converted_resume.pdf")
     try:
         pypandoc.convert_file(
-            input_docx,
+            filled_template_path,
             "pdf",
-            outputfile=output_pdf
+            outputfile=converted_pdf_path
         )
-        return output_pdf
+        if os.path.isfile(converted_pdf_path):
+            return converted_pdf_path
+        else:
+            print("Conversion completed but PDF file not found.")
+            return None
     except Exception as e:
         print("PDF conversion failed:", e)
         return None
 
 
 # === Global setup ===
-base_dir1 = os.path.dirname(__file__)  # folder where cv_parser.py lives
-template_docx = os.path.join(base_dir1, "Eng_TEMPLATE CV IOTA.docx")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+template_docx = os.path.join(base_dir, "Eng_TEMPLATE CV IOTA.docx")
+filled_template_path = os.path.join(base_dir, "filled_template.docx")
+converted_pdf_path = os.path.join(base_dir, "Converted_resume.pdf")
+
 keys = [
     "Name", "age", "nationality", "years_of_experience", "availability",
     "summary", "education", "training", "it", "languages", "professional_experience"
@@ -184,11 +181,7 @@ keys = [
 
 nlp = spacy.load('en_core_web_lg')
 
-#----Loading pattern data----
-
-base_dir = os.path.dirname(__file__)  # folder containing cv_parser.py
-
-# Open Section_synonyms_text_file.txt in the same folder
+# Load pattern data files
 with open(os.path.join(base_dir, "Section_synonyms_text_file.txt"), "r", encoding="utf-8") as file:
     content = file.read()
 section_synonyms = ast.literal_eval(content)
@@ -197,6 +190,5 @@ loaded_patterns = {}
 with open(os.path.join(base_dir, "Regex_patterns.txt"), "r", encoding="utf-8") as file:
     exec(file.read(), {}, loaded_patterns)
 
-#-----------------------------
 all_headings = [h for synonyms in section_synonyms.values() for h in synonyms]
 
