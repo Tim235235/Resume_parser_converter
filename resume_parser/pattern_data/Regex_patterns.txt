@@ -1,0 +1,111 @@
+
+
+age_patterns = [
+    r"\b(I\s*(?:am|’m|\'m))\s*(\d{1,3})\s*(?:years?|yrs?|y\.o\.)?\s*old?",
+    r"\bAge\s*:\s*(\d{1,3})\b",
+    r"\bborn\s+(in|on)\s*[:\-,]?\s*(\d{4})",
+    r"\b(age\s*(?:is|=))\s*(\d{1,3})\b",
+    r"\b(\d{1,3})\s*(?:years?|yrs?|y\.o\.)?\s*old\b",
+    r"\baged\s*(\d{1,3})\b",
+    r"\bAge\s*[-—]\s*(\d{1,3})\b",
+]
+
+nationality_patterns = [
+    r"\bNationality\s*[:\-–—=]?\s*([A-Z][a-z]+)",
+    r"\bNationality\s+is\s*([A-Z][a-z]+)",
+    r"\bCitizenship\s*[:\-–—=]?\s*([A-Z][a-z]+)",
+    r"\bCitizenship\s+is\s*([A-Z][a-z]+)",
+    r"\bCitizenship\s*=\s*([A-Z][a-z]+)",
+    r"\bholder\s+of\s+(?:a\s+)?([A-Z][a-z]+)\s+passport",
+    r"\bPassport\s*[:\-–—=]?\s*([A-Z][a-z]+)",
+    r"\bI\s+am\s+(?:an?\s+)?([A-Z][a-z]+)(?:\s+\w+)?",
+    r"\bI\s+hold\s+([A-Z][a-z]+)\s+nationality",
+    r"\bI\s+have\s+([A-Z][a-z]+)\s+citizenship",
+    r"\bI\s+possess\s+([A-Z][a-z]+)\s+citizenship",
+    r"\b([A-Z][a-z]+)\s+citizen",
+    r"\bcitizen\s+of\s+([A-Z][a-z]+)",
+    r"\bnational\s+of\s+([A-Z][a-z]+)",
+    r"\b([A-Z][a-z]+)\s+national",
+    r"\b([A-Z][a-z]+)\s+nationality",
+    r"\bI\s+(?:am|’m|\'m)\s+from\s+([A-Z][a-z]+)",
+    r"\bI\s+come\s+from\s+([A-Z][a-z]+)",
+    r"\bI\s+was\s+born\s+in\s+([A-Z][a-z]+)",
+    r"\bborn\s+in\s+([A-Z][a-z]+)",
+    r"\bbirthplace\s*[:=–-]?\s*([A-Z][a-z]+)",
+    r"\bfrom\s+([A-Z][a-z]+)",
+    r"\blive\s+in\s+([A-Z][a-z]+)",
+    r"\bbased\s+in\s+([A-Z][a-z]+)",
+    r"\bgrew\s+up\s+in\s+([A-Z][a-z]+)",
+]
+
+years_experience_patterns = [
+    r"(\d{1,2})\+?\s*(?:years?|yrs?)’?\s+of\s+experience",
+    r"over\s+(\d{1,2})\s*(?:years?|yrs?)\s+experience",
+    r"more\s+than\s+(\d{1,2})\s*(?:years?|yrs?)\s+experience",
+    r"approximately\s+(\d{1,2})\s*(?:years?|yrs?)\s+experience",
+    r"(\d{1,2})\s*(?:years?|yrs?)’?\s+experience",
+    r"experience\s+of\s+(\d{1,2})\s*(?:years?|yrs?)",
+    r"spanning\s+(\d{1,2})\s*(?:years?|yrs?)",
+    r"spent\s+(\d{1,2})\s*(?:years?|yrs?)\s+in",
+    r"bringing\s+(\d{1,2})\s*(?:years?|yrs?)\s+of",
+    r"possessing\s+(\d{1,2})\s*(?:years?|yrs?)\s+of",
+    r"boasting\s+(\d{1,2})\s*(?:years?|yrs?)\s+experience",
+    r"for\s+(?:over\s+|more\s+than\s+)?(\d{1,2})\s*(?:years?|yrs?)",
+    r"(\d{1,2})\s*\+\s*(?:years?|yrs?)\s*experience",
+    r"(\d{1,2})\s*(?:years?|yrs?)\s*in\s+\w+",
+    r"(\d{1,2})\s*(?:years?|yrs?)\s*working\s+(?:in|on|with)",
+    r"(\d{1,2})\s*[-–—]\s*(\d{1,2})\s*(?:years?|yrs?)",
+    r"between\s+(\d{1,2})\s*(?:and|-|to)\s*(\d{1,2})\s*(?:years?|yrs?)",
+]
+
+number_words = r"(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)"
+
+availability_patterns = [
+    r"\bavailable\s+(?:immediately|now|asap)\b",
+    r"\bcan\s+start\s+(?:immediately|now|asap)\b",
+    r"\bready\s+to\s+start\s+(?:immediately|now|asap)\b",
+
+    r"\bavailable\s+(?:to\s+start\s+)?from\s+([A-Za-z]+\s+\d{4}|" + number_words + r"\s+\w+|\w+)",
+    r"\bavailable\s+(?:to\s+start\s+)?in\s+(" + number_words + r"\s*(?:months?|weeks?)|\w+)",
+    r"\bavailable\s+as\s+of\s+(\w+)",
+    r"\bcan\s+start\s+(?:in|from|on|by)\s+(" + number_words + r"\s*(?:months?|weeks?)|\w+)",
+    r"\bstarting\s+(\w+)",
+    r"\bstart\s+date\s*[:\-–=]?\s*(\w+)",
+    r"\bearliest\s+start\s+date\s*[:\-–=]?\s*(\w+)",
+    r"\bavailable\s+starting\s+(\w+)",
+    r"\bready\s+to\s+start\s+(?:from|in|by)\s+(" + number_words + r"\s*(?:months?|weeks?)|\w+)",
+    r"\bjoining\s+from\s+(\w+)",
+    r"\bmay\s+start\s+in\s+(\w+)",
+    r"\bpossibly\s+starting\s+in\s+(\w+)",
+    r"\bstarting\s+in\s+(\w+)",
+    r"\bavailability\s*[:\-–=]?\s*(immediate|now|asap|\w+)",
+    r"\bavailable\s+on\s+(\w+)",
+
+    r"\bnotice\s+period\s*[:\-–=]?\s*(" + number_words + r"\s*(?:months?|weeks?))",
+    r"\bserving\s+notice\s+of\s+(" + number_words + r"\s*(?:months?|weeks?))",
+    r"\bafter\s+(" + number_words + r"\s*(?:months?|weeks?))\s+notice",
+    r"\bat\s+a\s+(" + number_words + r"\s*(?:months?|weeks?))\s+notice",
+    r"\b(" + number_words + r"\s*(?:months?|weeks?))\s+notice",
+
+    r"\b(?:i\s+)?(?:will|would|could|can)\s+be\s+able\s+to\s+start\s+(?:in|from|by|on|at)\s+(" + number_words + r"\s*(?:months?|weeks?)|\w+)",
+    r"\b(?:i\s+)?(?:will|would|could|can)\s+start\s+(?:in|from|by|on|at)\s+(" + number_words + r"\s*(?:months?|weeks?)|\w+)"
+]
+
+
+it_skills = [
+    "python", "java", "javascript", "c#", "c++", "c", "ruby", "php", "swift", "kotlin",
+    "typescript", "go", "scala", "perl", "r", "objective-c", "dart", "matlab", "sql",
+    "bash", "shell scripting", "react", "angular", "vue.js", "django", "flask",
+    "ruby on rails", "asp.net", "spring", "express.js", "laravel", "jquery", "bootstrap",
+    "node.js", "mysql", "postgresql", "oracle db", "microsoft sql server", "mongodb",
+    "redis", "cassandra", "elasticsearch", "sqlite", "mariadb", "amazon web services",
+    "aws", "microsoft azure", "google cloud platform", "gcp", "ibm cloud", "heroku",
+    "docker", "kubernetes", "jenkins", "travis ci", "gitlab ci", "circleci", "ansible",
+    "puppet", "chef", "terraform", "git", "svn", "mercurial", "linux", "windows", "macos",
+    "unix", "selenium", "junit", "testng", "cucumber", "postman", "jmeter", "apache hadoop",
+    "apache spark", "tableau", "power bi", "salesforce", "sap", "tensorflow", "pytorch",
+    "opencv", "rest apis", "graphql", "microservices", "visual studio", "intellij idea",
+    "eclipse", "pycharm", "vs code", "android studio"
+]
+
+
