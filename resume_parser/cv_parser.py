@@ -171,7 +171,7 @@ def convert_docx_to_pdf():
 
 
 # === Global setup ===
-template_docx = "resumes/Eng_TEMPLATE CV IOTA.docx"
+template_docx = "Eng_TEMPLATE CV IOTA.docx"
 keys = [
     "Name", "age", "nationality", "years_of_experience", "availability",
     "summary", "education", "training", "it", "languages", "professional_experience"
