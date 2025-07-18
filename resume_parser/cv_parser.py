@@ -5,6 +5,7 @@ from docxtpl import DocxTemplate
 from docx import Document
 import pdfplumber
 from docx2pdf import convert
+import os
 
 # === PDF extraction ===
 def extract_text_from_pdf(uploaded_file):
@@ -176,13 +177,22 @@ keys = [
 nlp = spacy.load('en_core_web_lg')
 
 #----Loading pattern data----
-with open(r"pattern_data/Section_synonyms_text_file.txt", "r", encoding="utf-8") as file:
+
+# === Setup base path ===
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# === Load section synonyms ===
+synonyms_path = os.path.join(BASE_DIR, "..", "pattern_data", "Section_synonyms_text_file.txt")
+with open(synonyms_path, "r", encoding="utf-8") as file:
     content = file.read()
 section_synonyms = ast.literal_eval(content)
 
+# === Load regex patterns ===
+regex_path = os.path.join(BASE_DIR, "..", "pattern_data", "Regex_patterns.txt")
 loaded_patterns = {}
-with open(r"pattern_data/Regex_patterns.txt", "r", encoding="utf-8") as file:
+with open(regex_path, "r", encoding="utf-8") as file:
     exec(file.read(), {}, loaded_patterns)
+
 #-----------------------------
 all_headings = [h for synonyms in section_synonyms.values() for h in synonyms]
 
