@@ -5,7 +5,6 @@ from docxtpl import DocxTemplate
 from docx import Document
 import pdfplumber
 from docx2pdf import convert
-import pythoncom
 
 # === PDF extraction ===
 def extract_text_from_pdf(uploaded_file):
