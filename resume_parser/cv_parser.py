@@ -5,6 +5,7 @@ from docxtpl import DocxTemplate
 from docx import Document
 import pdfplumber
 import pypandoc
+import os
 
 # === PDF extraction ===
 def extract_text_from_pdf(uploaded_file):
@@ -171,8 +172,8 @@ def convert_docx_to_pdf():
 
 
 # === Global setup ===
-base_dir = os.path.dirname(__file__)  # folder where cv_parser.py lives
-template_docx = os.path.join(base_dir, "Eng_TEMPLATE CV IOTA.docx")
+base_dir1 = os.path.dirname(__file__)  # folder where cv_parser.py lives
+template_docx = os.path.join(base_dir1, "Eng_TEMPLATE CV IOTA.docx")
 keys = [
     "Name", "age", "nationality", "years_of_experience", "availability",
     "summary", "education", "training", "it", "languages", "professional_experience"
@@ -181,7 +182,6 @@ keys = [
 nlp = spacy.load('en_core_web_lg')
 
 #----Loading pattern data----
-import os
 
 base_dir = os.path.dirname(__file__)  # folder containing cv_parser.py
 
