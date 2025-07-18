@@ -171,7 +171,8 @@ def convert_docx_to_pdf():
 
 
 # === Global setup ===
-template_docx = "Eng_TEMPLATE CV IOTA.docx"
+base_dir = os.path.dirname(__file__)  # folder where cv_parser.py lives
+template_docx = os.path.join(base_dir, "Eng_TEMPLATE CV IOTA.docx")
 keys = [
     "Name", "age", "nationality", "years_of_experience", "availability",
     "summary", "education", "training", "it", "languages", "professional_experience"
