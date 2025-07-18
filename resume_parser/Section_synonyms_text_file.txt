@@ -1,0 +1,151 @@
+{
+    "additional_information": [
+        "additional information", "other information",
+        "miscellaneous", "extra details"
+    ],
+    "affiliations": [
+        "professional affiliations", "memberships",
+        "associations", "organizations", "clubs"
+    ],
+    "awards": [
+        "awards", "honors", "achievements",
+        "recognitions", "distinctions", "accolades",
+        "prizes", "commendations"
+    ],
+    "certifications": [
+        "certifications", "licenses", "credentials",
+        "accreditations", "certified courses", "professional certificates"
+    ],
+    "conferences": [
+        "conferences", "seminars", "talks",
+        "presentations", "workshops attended",
+        "speaking engagements", "panels"
+    ],
+    "education": [
+        "education", "academic background", "educational background",
+        "academic qualifications", "studies", "qualifications",
+        "academic education", "educational history", "coursework",
+        "academic profile", "degrees", "formal education", "academics"
+    ],
+    "employment_gaps": [
+        "employment gaps", "career breaks",
+        "professional breaks", "sabbaticals"
+    ],
+    "hobbies": [
+        "hobbies", "interests", "personal hobbies",
+        "leisure activities"
+    ],
+    "interests": [
+        "interests", "hobbies", "personal interests",
+        "extracurricular activities", "activities",
+        "leisure activities"
+    ],
+    "languages": [
+        "languages", "language skills", "linguistic skills",
+        "spoken languages", "language proficiency",
+        "language competencies", "language fluency"
+    ],
+    "nationality_synonyms": [
+        "nationality", "citizenship", "country of citizenship",
+        "country of origin", "origin", "place of origin",
+        "birth nationality", "legal nationality", "passport nationality",
+        "passport", "visa status", "immigration status", "resident status",
+        "permanent residency", "residency", "home country",
+        "homeland", "native country"
+    ],
+    "objective": [
+        "objective", "career objective", "job objective",
+        "professional objective", "goal"
+    ],
+    "portfolio": [
+        "portfolio", "work samples", "projects",
+        "showcase", "demonstration of work"
+    ],
+    "professional_experience": [
+        "professional experience", "experience", "work experience",
+        "employment history", "career history", "work history",
+        "professional background", "relevant experience", "career experience",
+        "employment experience", "job experience", "projects",
+        "positions held", "skills", "work assignments", "roles",
+        "employment record", "job history"
+    ],
+    "projects": [
+        "projects", "relevant projects", "personal projects",
+        "portfolio", "selected projects", "project work",
+        "notable projects", "key projects"
+    ],
+    "publications": [
+        "publications", "articles", "papers",
+        "books", "research", "journals", "conference papers",
+        "project publications"
+    ],
+    "references": [
+        "references", "referees", "recommendations",
+        "professional references", "recommendation letters"
+    ],
+    "social_profiles": [
+        "social media", "linkedin", "github", "website",
+        "online profiles", "social links"
+    ],
+    "soft_skills": [
+        "soft skills", "interpersonal skills", "communication skills",
+        "teamwork", "leadership", "organizational skills"
+    ],
+    "summary": [
+        "summary", "professional summary", "career summary",
+        "executive summary", "profile", "personal profile",
+        "about me", "overview", "objective", "career objective",
+        "introduction", "highlights", "professional profile",
+        "key qualifications", "summary statement", "personal statement"
+    ],
+    "summary_of_qualifications": [
+        "summary of qualifications", "qualifications summary",
+        "key qualifications"
+    ],
+    "technical_skills": [
+        "technical skills", "technical expertise",
+        "software skills", "tools and technologies"
+    ],
+    "training": [
+        "training", "additional training", "professional training",
+        "certifications & training", "workshops", "courses",
+        "continuing education", "development", "professional development",
+        "specialized training", "seminars", "online courses",
+        "certificates", "licenses", "credentialing", "skills", "technical skills", "competencies",
+        "core competencies", "key skills", "expertise",
+        "professional skills", "technical expertise",
+        "software skills", "hard skills", "soft skills", "capabilities"
+    ],
+    "volunteer_experience": [
+        "volunteer work", "volunteering", "community service",
+        "charity work", "social work", "nonprofit experience",
+        "volunteer activities", "volunteering interests"
+    ], "it": [
+        "it",
+    "information technology",
+    "information systems",
+    "computing",
+    "computer science",
+    "digital technology",
+    "information and communication technology",
+    "ict",
+    "computer technology",
+    "technology",
+    "tech industry",
+    "technology sector",
+    "it sector",
+    "tech field",
+    "digital industry",
+    "technical services",
+    "it services",
+    "technology solutions",
+    "it & technical skills"
+],
+    "Name": ["name"],
+    "age": ["age"],
+    "nationality": ["nationality"],
+    "years of experience": ["years of experience"],
+    "availability": ["availability"],
+    "point of mobilization": ["point of mobilisation"]
+
+}
