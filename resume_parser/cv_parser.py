@@ -134,11 +134,13 @@ def populate_word_dic(dti, ed):
     return ed
 
 # === Replace placeholders in DOCX ===
-def replace_placeholders(use_data):
-    doc = DocxTemplate(template_docx)
-    doc.render(use_data)
-    doc.save(filled_template_path)
-    return doc
+def replace_placeholders(data):
+    template_path = os.path.join(os.path.dirname(__file__), "Eng_TEMPLATE CV IOTA.docx")
+    doc = DocxTemplate(template_path)
+    doc.render(data)
+    output_path = os.path.join(os.path.dirname(__file__), "filled_template.docx")
+    doc.save(output_path)
+    return output_path
 
 # === Bullet points fix ===
 def bullet_points_check(text):
@@ -148,28 +150,6 @@ def bullet_points_check(text):
             value = re.sub(bullet_pattern, r'\n• ', value)
             text[key] = value
     return text
-
-# === Convert DOCX to PDF ===
-def convert_docx_to_pdf():
-    base_dir = os.path.dirname(__file__)
-    input_docx = os.path.join(base_dir, "filled_template.docx")
-    output_pdf = os.path.join(base_dir, "Converted_resume.pdf")
-    
-    try:
-        pypandoc.convert_file(
-            input_docx,
-            "pdf",
-            outputfile=output_pdf
-        )
-        if os.path.exists(output_pdf):
-            return output_pdf
-        else:
-            print("Conversion reported success but PDF file not found.")
-            return None
-    except Exception as e:
-        print("PDF conversion failed:", e)
-        return None
-
 
 
 # === Global setup ===
