@@ -180,12 +180,12 @@ keys = [
 nlp = spacy.load('en_core_web_lg')
 
 #----Loading pattern data----
-with open(r"pattern_data/Section_synonyms_text_file.txt", "r", encoding="utf-8") as file:
+with open(r"Section_synonyms_text_file.txt", "r", encoding="utf-8") as file:
     content = file.read()
 section_synonyms = ast.literal_eval(content)
 
 loaded_patterns = {}
-with open(r"pattern_data/Regex_patterns.txt", "r", encoding="utf-8") as file:
+with open(r"Regex_patterns.txt", "r", encoding="utf-8") as file:
     exec(file.read(), {}, loaded_patterns)
 #-----------------------------
 all_headings = [h for synonyms in section_synonyms.values() for h in synonyms]
