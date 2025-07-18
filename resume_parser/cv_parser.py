@@ -159,9 +159,9 @@ def bullet_points_check(text):
     return text
 
 def convert_docx_to_pdf():
-    base_dir = os.path.dirname(__file__)
-    input_docx = os.path.join(base_dir, "filled_template.docx")
-    output_pdf = os.path.join(base_dir, "Converted_resume.pdf")
+    base_dir2 = os.path.dirname(__file__)
+    input_docx = os.path.join(base_dir2, "filled_template.docx")
+    output_pdf = os.path.join(base_dir2, "Converted_resume.pdf")
     try:
         pypandoc.convert_file(
             input_docx,
