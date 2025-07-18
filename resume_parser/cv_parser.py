@@ -4,8 +4,7 @@ import spacy
 from docxtpl import DocxTemplate
 from docx import Document
 import pdfplumber
-from docx2pdf import convert
-import pythoncom
+import pypandoc
 
 # === PDF extraction ===
 def extract_text_from_pdf(uploaded_file):
@@ -159,12 +158,16 @@ def bullet_points_check(text):
     return text
 
 def convert_docx_to_pdf():
-    pythoncom.CoInitialize()
     try:
-        convert("filled_template.docx", "Converted_resume.pdf")
+        output = pypandoc.convert_file(
+            "filled_template.docx",
+            "pdf",
+            outputfile="Converted_resume.pdf"
+        )
         return "Converted_resume.pdf"
-    finally:
-        pythoncom.CoUninitialize()
+    except Exception as e:
+        print("PDF conversion failed:", e)
+        return None
 
 
 # === Global setup ===
