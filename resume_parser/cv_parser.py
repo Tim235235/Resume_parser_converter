@@ -159,13 +159,16 @@ def bullet_points_check(text):
     return text
 
 def convert_docx_to_pdf():
+    base_dir = os.path.dirname(__file__)
+    input_docx = os.path.join(base_dir, "filled_template.docx")
+    output_pdf = os.path.join(base_dir, "Converted_resume.pdf")
     try:
-        output = pypandoc.convert_file(
-            "filled_template.docx",
+        pypandoc.convert_file(
+            input_docx,
             "pdf",
-            outputfile="Converted_resume.pdf"
+            outputfile=output_pdf
         )
-        return "Converted_resume.pdf"
+        return output_pdf
     except Exception as e:
         print("PDF conversion failed:", e)
         return None
